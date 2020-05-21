@@ -5,7 +5,7 @@ RUN apk add \
         autoconf automake texinfo && \
     apk add \
         --no-cache --virtual build-dependencies \
-        build-base linux-headers lksctp-tools-dev && \
+        build-base linux-headers lksctp-tools-dev git && \
     apk add \
         --no-cache --virtual runtime-dependencies \
         lksctp-tools && \
