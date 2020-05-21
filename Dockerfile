@@ -26,6 +26,7 @@ RUN apk add \
     make && \
     strip -s src/netperf src/netserver && \
     install -m 755 src/netperf src/netserver /usr/bin && \
+    cd ../ && \
     rm -rf netperf && \
     apk del build-dependencies
 
