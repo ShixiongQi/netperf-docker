@@ -1,6 +1,11 @@
 FROM alpine:latest
 
-ENV NETPERF_VERSION=2.7.0
+RUN apt-get update && \
+     apt-get install -y \
+     autotools-dev \
+     autoconf \
+     automake \
+     texinfo
 
 RUN apk add \
         --no-cache --virtual build-dependencies \
@@ -8,9 +13,9 @@ RUN apk add \
     apk add \
         --no-cache --virtual runtime-dependencies \
         lksctp-tools && \
-	curl -LO ftp://ftp.netperf.org/netperf/netperf-${NETPERF_VERSION}.tar.gz && \
-	tar -xzf netperf-${NETPERF_VERSION}.tar.gz && \
-    cd netperf-${NETPERF_VERSION} && \
+	git clone https://github.com/HewlettPackard/netperf.git && \
+    cd netperf && \
+    ./autogen.sh && \
     ./configure \
         --prefix=/usr \
         --enable-histogram \
