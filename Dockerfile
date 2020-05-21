@@ -2,7 +2,7 @@ FROM alpine:latest
 
 RUN apk add \
         --no-cache --virtual build-dependencies \
-        autoconf automake make gcc g++ libtool pkgconfig libmcrypt-dev re2c libressl@edge libressl-dev@edge git zlib-dev xdg-utils libpng-dev freetype-dev libjpeg-turbo-dev openssh-client libxslt-dev ca-certificates gmp-dev texinfo && \
+        autoconf automake make gcc g++ libtool pkgconfig libmcrypt-dev re2c zlib-dev xdg-utils libpng-dev freetype-dev libjpeg-turbo-dev openssh-client libxslt-dev ca-certificates gmp-dev texinfo && \
     apk add \
         --no-cache --virtual build-dependencies \
         build-base linux-headers lksctp-tools-dev git && \
