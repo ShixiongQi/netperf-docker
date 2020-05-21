@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 # Satisfy deps
 RUN apt-get update && \
-    apt-get install -y gcc make autotools-dev autoconf automake texinfo && \
+    apt-get install -y gcc make autotools-dev autoconf automake texinfo git && \
     apt-get clean && \
     rm -rf /tmp/* /var/tmp/* && \
     rm -rf /var/lib/apt/lists/* && \
