@@ -1,16 +1,15 @@
-FROM ubuntu:16.04
+FROM alpine:latest
 
-# Satisfy deps
-RUN apt-get update && \
-    apt-get install -y gcc make autotools-dev autoconf automake texinfo git && \
-    apt-get clean && \
-    rm -rf /tmp/* /var/tmp/* && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -f /etc/dpkg/dpkg.cfg.d/02apt-speedup
+# ENV NETPERF_VERSION=2.7.0
 
-# Download netperf
-RUN git clone https://github.com/HewlettPackard/netperf.git
-RUN cd netperf && \
+RUN apk add \
+        --no-cache --virtual build-dependencies \
+        build-base linux-headers lksctp-tools-dev git autoconf automake texinfo && \
+    apk add \
+        --no-cache --virtual runtime-dependencies \
+        lksctp-tools && \
+    git clone https://github.com/HewlettPackard/netperf.git && \
+    cd netperf && \
     ./autogen.sh && \
     ./configure \
         --prefix=/usr \
@@ -25,6 +24,9 @@ RUN cd netperf && \
         --enable-burst \
         --enable-cpuutil=procstat && \
     make && \
-    make install
+    strip -s src/netperf src/netserver && \
+    install -m 755 src/netperf src/netserver /usr/bin && \
+    rm -rf netperf && \
+    apk del build-dependencies
 
-# CMD ["/usr/local/bin/netserver", "-D"]
+# CMD ["/usr/bin/netserver", "-D"]
