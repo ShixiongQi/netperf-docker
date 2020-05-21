@@ -2,10 +2,10 @@ FROM alpine:latest
 
 RUN apk add \
         --no-cache --virtual build-dependencies \
-        autotools-dev autoconf automake texinfo && \
+        autoconf automake texinfo && \
     apk add \
         --no-cache --virtual build-dependencies \
-        curl build-base linux-headers lksctp-tools-dev && \
+        build-base linux-headers lksctp-tools-dev && \
     apk add \
         --no-cache --virtual runtime-dependencies \
         lksctp-tools && \
