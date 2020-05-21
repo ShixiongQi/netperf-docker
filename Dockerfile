@@ -1,13 +1,9 @@
 FROM alpine:latest
 
-RUN apt-get update && \
-     apt-get install -y \
-     autotools-dev \
-     autoconf \
-     automake \
-     texinfo
-
 RUN apk add \
+        --no-cache --virtual build-dependencies \
+        autotools-dev autoconf automake texinfo && \
+    apk add \
         --no-cache --virtual build-dependencies \
         curl build-base linux-headers lksctp-tools-dev && \
     apk add \
