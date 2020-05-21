@@ -1,6 +1,7 @@
 FROM alpine:latest
 
-RUN apk add \
+RUN apk --update upgrade && \
+    apk add \
         --no-cache --virtual build-dependencies \
         autoconf automake make gcc g++ libtool pkgconfig libmcrypt-dev re2c zlib-dev xdg-utils libpng-dev freetype-dev libjpeg-turbo-dev openssh-client libxslt-dev ca-certificates gmp-dev texinfo && \
     apk add \
